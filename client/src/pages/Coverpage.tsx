@@ -5,7 +5,7 @@ import coverimg from "../assets/images/Component 1.png";
 const Coverpage: React.FC = () => {
   return (
     <div>
-      <div className="flex gap-4 items-center justify-center bg-[#dfd7e7] pt-20">
+      <div className="flex gap-4 items-center justify-center pt-20">
         <div className="flex flex-col gap-5 px-5 py-10 text-start w-133.75">
           <h3 className="text-[50px] text-medium">
             Manage your Tasks on{" "}
@@ -19,7 +19,7 @@ const Coverpage: React.FC = () => {
           </p>
           <Link
             to="/mytasks"
-            className="w-fit py-2 px-4 bg-[#974FD0] text-[#FAF9FB] rounded-md hover:bg-[#292929] hover:text-[#B8B6B6]"
+            className="w-fit py-2 px-4 text-[#FAF9FB] rounded-md hover:bg-[#292929] hover:text-[#B8B6B6]"
           >
             Go to My Tasks
           </Link>

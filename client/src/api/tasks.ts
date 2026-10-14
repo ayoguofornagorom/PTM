@@ -42,6 +42,7 @@ async function apiRequest<T>(
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
     headers: {
+      ...(options?.headers || {}), //spreading allows Authorization to override it safely
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
       ...options.headers,

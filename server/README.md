@@ -52,7 +52,7 @@ npm start
 ## API tested with Postman
 
 ### Register
-`POST http://localhost:3000/api/auth/register`
+`POST http://localhost:7000/api/auth/register`
 
 ```json
 {
@@ -63,7 +63,7 @@ npm start
 ```
 
 ### Login
-`POST http://localhost:3000/api/auth/login`
+`POST http://localhost:7000/api/auth/login`
 
 ```json
 {

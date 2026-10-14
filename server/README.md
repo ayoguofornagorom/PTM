@@ -1,6 +1,6 @@
 # TaskDuty Server - Authentication & Authorization
 
-This server implements the backend requirement for authentication, authorization, and user-scoped task data. The React client is intentionally **not connected to these API routes**; Postman can be used to test the API independently.
+This server implements authentication, authorization, and user-scoped task data for the React client and Postman.
 
 ## Packages used
 
@@ -52,7 +52,7 @@ npm start
 ## API tested with Postman
 
 ### Register
-`POST http://localhost:5000/api/auth/register`
+`POST http://localhost:3000/api/auth/register`
 
 ```json
 {
@@ -63,7 +63,7 @@ npm start
 ```
 
 ### Login
-`POST http://localhost:5000/api/auth/login`
+`POST http://localhost:3000/api/auth/login`
 
 ```json
 {
@@ -87,3 +87,15 @@ Authorization: Bearer YOUR_TOKEN
 - `DELETE /api/tasks/:id` - delete a task owned by the authenticated user.
 
 The server does not accept a user id from the task body. It gets the user id from the verified JWT and includes that id in task queries. This is the authorization/user-scoping rule.
+
+## Connect the live client
+
+The client uses `http://localhost:3000/api` only during local Vite development. For a deployed client, set the build-time environment variable `VITE_API_BASE_URL` to the deployed backend URL including `/api` (for example, `https://your-api-host.example/api`) in the frontend hosting settings, then rebuild/redeploy the client. The backend must also be publicly reachable and configured with its production MongoDB URI and JWT secret.
+
+To test a Postman-issued token on the deployed client, open the browser console on the client site's own origin and run:
+
+```
+localStorage.setItem("ptm_token", "paste-the-token-value-here");
+```
+
+Paste only the JWT value, without the `Bearer ` prefix. Use a token for the same user who created the tasks; task lists are scoped to the authenticated user. Tokens expire after 12 hours. Do not share or commit tokens.

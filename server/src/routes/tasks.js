@@ -34,15 +34,45 @@ const validateTask = ({ title, description, dueDate, category }) => {
 
 router.use(requireAuth);
 
-router.get("/", async (req, res) => {
+
+
+/*
+  Get tasks belonging to the logged-in user.
+  If a search word is provided, search task titles and descriptions.
+*/
+router.get("/", async (req, res, next) => {
   try {
-    const tasks = await Task.find({ user: req.user.id }).sort({ dueDate: 1, createdAt: -1 });
-    return res.json({ tasks });
+    // Only search tasks owned by the logged-in user.
+    const filter = { user: req.user.id };
+
+    // Read the search word from the URL.
+    const search = String(req.query.search || "").trim();
+
+    if (search) {
+      // Treat special characters as normal text in the search.
+      const safeSearch = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+      // Search in the title or description, ignoring letter case.
+      filter.$or = [
+        { title: { $regex: safeSearch, $options: "i" } },
+        { description: { $regex: safeSearch, $options: "i" } },
+      ];
+    }
+
+    // Get matching tasks, ordered by due date.
+    const tasks = await Task.find(filter).sort({
+      dueDate: 1,
+      createdAt: -1,
+    });
+
+    // Return the matching tasks.
+    return res.json(tasks);
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Unable to fetch tasks." });
+    next(error);
   }
 });
+
+
 
 router.post("/", async (req, res) => {
   try {

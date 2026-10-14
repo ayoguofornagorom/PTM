@@ -6,7 +6,7 @@ import authRoutes from "./routes/auth.js";
 import taskRoutes from "./routes/tasks.js";
 
 const app = express();
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 3000;
 
 if (!process.env.MONGO_URI || !process.env.JWT_SECRET) {
   console.error("Missing MONGO_URI or JWT_SECRET in server/.env");
@@ -37,5 +37,3 @@ try {
   console.error("MongoDB connection failed:", error);
   process.exit(1);
 }
-
-// kefhelhflkfdldcsd;

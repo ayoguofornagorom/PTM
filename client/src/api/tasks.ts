@@ -40,7 +40,7 @@ async function apiRequest<T>(
       "Authentication token not found. Please log in through Postman and set ptm_token for local testing.",
     );
   }
-  console.log({ token });
+
 
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,

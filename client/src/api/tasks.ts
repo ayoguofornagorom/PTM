@@ -1,7 +1,10 @@
 import type { Task, TaskFormValues } from "../types/task";
 
-// Keep the backend API address in one place.
-const API_BASE_URL = "http://localhost:3000/api";
+// CHANGE: Use the deployed backend URL when available.
+// Fall back to localhost during local development.
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  "http://localhost:3000/api";
 
 // CHANGE: Describe the task format returned by MongoDB.
 interface BackendTask {

@@ -299,7 +299,7 @@ const MyTasks: React.FC = () => {
 
                   <div className="min-w-0 flex-1">
                     <h2
-                      className={`break-words text-lg font-semibold ${
+                      className={`wrap-break-word text-lg font-semibold ${
                         task.completed
                           ? "text-gray-400 line-through"
                           : "text-gray-900"
@@ -309,7 +309,7 @@ const MyTasks: React.FC = () => {
                     </h2>
 
                     <p
-                      className={`mt-2 whitespace-pre-wrap break-words text-sm ${
+                      className={`mt-2 whitespace-pre-wrap wrap-break-word text-sm ${
                         task.completed ? "text-gray-400" : "text-gray-600"
                       }`}
                     >
